@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="1"
+   name=""
+   committed-date="2007-08-30T17:53:03.581583Z"
+   url="file:///Users/daryl/Programming/Repositories/Spider/Trunk"
+   last-author="daryl"
+   kind="dir"
+   uuid="d51f2355-ee38-0410-bcfb-f4002f2e1925"
+   repos="file:///Users/daryl/Programming/Repositories/Spider"
+   revision="1"/>
+<entry
+   name="Spider.xcodeproj"
+   kind="dir"/>
+<entry
+   committed-rev="1"
+   name="Info.plist"
+   text-time="2007-08-30T18:46:13.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="34c753f1251b4227e0b67ee1832cc24f"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   name="src"
+   kind="dir"/>
+<entry
+   committed-rev="1"
+   name="Notes"
+   text-time="2007-08-30T18:46:13.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="5dc911ca8fe53a15d9061a97e03a8231"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   name="res"
+   kind="dir"/>
+<entry
+   committed-rev="1"
+   name="Spider_Prefix.pch"
+   text-time="2007-08-30T18:46:13.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="66a8bbf114ce2af65948cbafe1de7438"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:13.000000Z"/>
+<entry
+   name="English.lproj"
+   kind="dir"/>
+</wc-entries>

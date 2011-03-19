@@ -1,0 +1,91 @@
+//  Spider
+//  PSLayoutWindowController.h
+//
+//  Created by Daryl Dudey on 14/05/2007.
+//  Copyright Daryl Dudey 2007 . All rights reserved.
+
+#import <Cocoa/Cocoa.h>
+#import "Classes.h"
+
+@interface PSLayoutWindowController : NSWindowController
+{
+	// Owners
+	PSProject *m_Project;
+	PSLayout *m_Layout;
+
+	// Toolbar
+	NSToolbar *m_ToolbarMain;
+	NSToolbarItem *m_ToolbaritemZoomIn;
+	NSToolbarItem *m_ToolbaritemZoomOut;
+	
+#pragma mark Outlets
+	IBOutlet NSWindow *windowDocument;
+	IBOutlet PSView *viewMain;
+	IBOutlet NSScrollView *viewMainScroll;
+	IBOutlet NSTextField *textfieldID;
+	IBOutlet NSTextField *textfieldTitleValueLabel;
+	IBOutlet NSTextField *textfieldTitleValue;
+	IBOutlet NSTextField *textfieldType;
+	IBOutlet NSTextField *textfieldPosition;
+	IBOutlet NSTextField *textfieldSize;
+
+	// Set values
+	PSComponent *m_ComponentValue;
+	IBOutlet NSWindow *windowValueBoolean;
+	IBOutlet NSWindow *windowValueByte;
+	IBOutlet NSWindow *windowValueDateTime;
+	IBOutlet NSWindow *windowValueInteger;
+	IBOutlet NSWindow *windowValueReal;
+	IBOutlet NSWindow *windowValueString;
+	IBOutlet NSButtonCell *buttoncellValueBooleanTrue;
+	IBOutlet NSButtonCell *buttoncellValueBooleanFalse;
+	IBOutlet NSTextField *textfieldValueByte;
+	IBOutlet NSDatePicker *datepickerDateTime;
+	IBOutlet NSTextField *textfieldValueInteger;
+	IBOutlet NSTextField *textfieldValueReal;
+	IBOutlet NSTextField *textfieldValueString;
+}
+- (IBAction) actionValueDone:(NSTextField *)sender;
+
+#pragma mark Toolbar
+- (void) setupToolbar;
+- (NSToolbarItem *) toolbar:(NSToolbar *)toolbar
+	  itemForItemIdentifier:(NSString *)itemIdentifier
+  willBeInsertedIntoToolbar:(BOOL)flag;
+- (NSArray *) toolbarAllowedItemIdentifiers: (NSToolbar *) toolbar;
+- (NSArray *) toolbarDefaultItemIdentifiers: (NSToolbar *) toolbar;
+
+#pragma mark Toolbar Actions
+- (void) togglePalette:(id)sender;
+- (void) showPalette:(id)sender;
+- (void) toggleRulers:(id)sender;
+- (void) zoomIn:(id)sender;
+- (void) zoomOut:(id)sender;
+
+#pragma mark Accessors
+- (void) setProject:(PSProject *)project;
+- (void) setLayout:(PSLayout *)layout;
+- (PSLayout *) getLayout;
+- (PSView *) viewMain;
+- (NSUndoManager *) undoManager;
+- (NSToolbar *) toolbar;
+- (NSToolbarItem *) toolbaritemZoomIn;
+- (NSToolbarItem *) toolbaritemZoomOut;
+
+#pragma mark Methods
+- (void) drawComponents:(PSView *)sender andPositionAndSize:(NSRect)positionAndSize;
+- (void) drawConnections:(PSView *)sender andPositionAndSize:(NSRect)positionAndSize;
+- (BOOL) matchComponent:(NSPoint)point shiftHeld:(BOOL)shiftHeld;
+- (PSComponentConnection *) matchConnection:(NSPoint)point matchType:(int)matchType matchInput:(BOOL)matchInput matchOutput:(BOOL)matchOutput;
+- (PSConnection *) matchConnectionLine:(NSPoint)point;
+- (void) selectionBox:(NSRect)rect;
+- (void) dragLeftWithX:(int)deltaX andY:(int)deltaY;
+- (void) refreshView;
+- (void) updateInspector;
+- (void) relativeMove:(int)x y:(int)y;
+- (void) postAddComponent:(PSComponent *)component;
+- (void) setLiteralValue:(PSComponent *)component;
+- (float) calculateDistancePointToLine:(NSPoint)point lineStart:(NSPoint)lineStart lineEnd:(NSPoint)lineEnd;
+- (void) setSelectedConnectionsBasedOnSelectedComponents;
+
+@end

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="1"
+   name=""
+   committed-date="2007-08-30T17:53:03.581583Z"
+   url="file:///Users/daryl/Programming/Repositories/Spider/Trunk/res/img"
+   last-author="daryl"
+   kind="dir"
+   uuid="d51f2355-ee38-0410-bcfb-f4002f2e1925"
+   repos="file:///Users/daryl/Programming/Repositories/Spider"
+   revision="1"/>
+<entry
+   name="Data.tiff"
+   kind="file"
+   deleted="true"
+   revision="24"/>
+<entry
+   name="Minus.tiff"
+   kind="file"
+   deleted="true"
+   schedule="add"
+   revision="0"/>
+<entry
+   name="ZoomIn.tiff"
+   kind="file"
+   deleted="true"
+   revision="24"/>
+<entry
+   name="Rulers.tiff"
+   kind="file"
+   deleted="true"
+   revision="24"/>
+<entry
+   name="ZoomOut.tiff"
+   kind="file"
+   deleted="true"
+   revision="24"/>
+<entry
+   name="Palette.tiff"
+   kind="file"
+   deleted="true"
+   revision="24"/>
+<entry
+   name="Plus.tiff"
+   kind="file"
+   deleted="true"
+   schedule="add"
+   revision="0"/>
+<entry
+   committed-rev="1"
+   name="Logo.icns"
+   text-time="2007-08-30T18:46:13.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="6952cabff918e3bc6c13a3fc87ba9f14"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+</wc-entries>

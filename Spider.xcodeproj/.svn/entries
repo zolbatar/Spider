@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="1"
+   name=""
+   committed-date="2007-08-30T17:53:03.581583Z"
+   url="file:///Users/daryl/Programming/Repositories/Spider/Trunk/Spider.xcodeproj"
+   last-author="daryl"
+   kind="dir"
+   uuid="d51f2355-ee38-0410-bcfb-f4002f2e1925"
+   repos="file:///Users/daryl/Programming/Repositories/Spider"
+   revision="1"/>
+<entry
+   committed-rev="1"
+   name="daryl.mode1"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="363e8c67f1d1053d4e7b4dd771083ba2"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="24"
+   name="daryl.mode2"
+   text-time="2007-09-11T21:31:55.000000Z"
+   committed-date="2007-09-11T21:32:25.908586Z"
+   checksum="cb9b2945913d4914b93fb8e3483a9ce6"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="24"/>
+<entry
+   committed-rev="24"
+   name="daryl.pbxuser"
+   text-time="2007-09-11T21:31:55.000000Z"
+   committed-date="2007-09-11T21:32:25.908586Z"
+   checksum="567a3933ada0d69541b92d0bb9592349"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="24"/>
+<entry
+   committed-rev="1"
+   name="daryl.perspective"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="f5b4c5bf42ff231094c9e063e2f41e99"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="3"
+   name="project.pbxproj"
+   text-time="2007-09-11T21:31:55.000000Z"
+   committed-date="2007-08-30T19:25:19.687330Z"
+   checksum="8b77ea009fa3732985409770b62fd9f6"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="3"/>
+</wc-entries>

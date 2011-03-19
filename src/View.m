@@ -1,0 +1,732 @@
+//  Spider
+//  View.m
+//
+//  Created by Daryl Dudey on 15/05/2007.
+//  Copyright Daryl Dudey 2007 . All rights reserved.
+
+#import "Headers.h"
+
+@implementation PSView
+
+enum {
+	stateNone,
+	stateComponentSelected,
+	stateGrabHand,
+	stateBoxSelect,
+	stateConnection,
+	stateConnectionLine
+};
+
+extern NSString *ComponentPBoardType;
+
+#pragma mark Alloc
+- (id)initWithFrame:(NSRect)rect
+{
+	self = [super initWithFrame:rect];
+
+	// Setup
+	m_State = stateNone;
+	m_RedrawPhase = cAnimationCycle;
+	m_RedrawPhaseReversed = 0;
+	[self registerForDraggedTypes:
+		[NSArray arrayWithObject:ComponentPBoardType]];
+
+	// Scroll notification
+	[[NSNotificationCenter defaultCenter] addObserver:self 
+											 selector:@selector(viewDidScroll:) 
+												 name:NSViewFrameDidChangeNotification  // Frame = resize
+											   object:[[self enclosingScrollView] contentView]];
+	[[NSNotificationCenter defaultCenter] addObserver:self 
+											 selector:@selector(viewDidScroll:) 
+												 name:NSViewBoundsDidChangeNotification  // Bounds = scroll
+											   object:[[self enclosingScrollView] contentView]];
+
+	// Notifications
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(handleShowAnimationsChanged:)
+												 name:@"PSUD_ShowAnimations_Changed"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(handleShowAnimationsChanged:)
+												 name:@"PSUD_ShowAnimationsFlow_Changed"
+											   object:nil];
+	
+	// Set redraw timer
+	m_RedrawTimer = [NSTimer scheduledTimerWithTimeInterval:0.25
+													 target:self
+												   selector:@selector(timerRedrawEvent:)
+												   userInfo:nil
+													repeats:YES];
+	
+	return self;
+}
+	
+- (void) dealloc
+{
+	[m_RedrawTimer invalidate];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[self unregisterDraggedTypes];
+	[m_ViewMainScroll release];
+	[super dealloc];
+}
+
+#pragma mark Handlers for Defaults Change
+- (void) handleShowAnimationsChanged:(NSNotification *)notification
+{
+	[self setNeedsDisplay:YES];
+}
+
+#pragma mark Redraw Timer
+- (void) timerRedrawEvent: (NSTimer*) aTimer
+{
+	if ([[NSApp delegate] userdefault_ShowAnimations])
+	{
+		m_RedrawPhase--;
+		m_RedrawPhaseReversed++;
+		if (m_RedrawPhase == 0)
+		{
+			m_RedrawPhase = cAnimationCycle;
+			m_RedrawPhaseReversed = 0;
+		}		
+		[self setNeedsDisplay:YES];
+	}
+}
+
+#pragma mark Accessors
+- (void) setViewMainScroll:(NSScrollView *)viewMainScroll
+{
+	if (m_ViewMainScroll != viewMainScroll)
+	{
+		[m_ViewMainScroll release];
+		m_ViewMainScroll = [viewMainScroll retain];
+	}
+}
+
+- (void) setCentrePoint:(NSPoint)centrePoint
+{
+	m_CentrePoint = centrePoint;
+}
+
+- (void) setZoomFactor:(float)zoomFactor
+{
+	// Get centre point
+	NSRect cpFrame = [(NSClipView*)[self superview] documentVisibleRect];
+	NSPoint centrePoint;
+	centrePoint.x = cpFrame.origin.x + cpFrame.size.width / 2.0;
+	centrePoint.y = cpFrame.origin.y + cpFrame.size.height / 2.0;
+	
+	[self scaleUnitSquareToSize:NSMakeSize(zoomFactor, zoomFactor)];
+	NSRect frame = [self frame];
+	frame.size.width *= zoomFactor;
+	frame.size.height *= zoomFactor;
+	[self setFrame:frame];
+	
+	// Set new centre point
+	NSRect newcpFrame = [(NSClipView*)[self superview] documentVisibleRect];
+	NSPoint newCentrePoint;
+	newCentrePoint.x = centrePoint.x - ( newcpFrame.size.width / 2.0 );
+	newCentrePoint.y = centrePoint.y - ( newcpFrame.size.height / 2.0 );
+	[self scrollPoint:newCentrePoint];
+}
+
+- (float) floatRedrawPhase
+{
+	return m_RedrawPhase;
+}
+
+- (float) floatRedrawPhaseReversed
+{
+	return m_RedrawPhaseReversed;
+}
+
+- (NSScrollView *) viewMainScroll
+{
+	return m_ViewMainScroll;
+}
+
+#pragma mark Delegate
+- (id) delegate
+{
+    return delegate;
+}
+
+- (void) setDelegate:(id)newDelegate
+{
+	[delegate release];
+    delegate = [newDelegate retain];
+}
+
+#pragma mark Overrides
+- (void) viewDidScroll:(NSNotification *)notification
+{
+	NSRect clipFrame = [(NSClipView*)[self superview] documentVisibleRect];
+	[[delegate layout] setSizeAndPosition:clipFrame];
+}
+
+- (BOOL) isFlipped
+{
+	return YES;
+}
+
+- (NSDragOperation) draggingEntered:(id <NSDraggingInfo>)sender
+{
+	return NSDragOperationCopy;
+}
+
+- (BOOL) performDragOperation:(id <NSDraggingInfo>)sender
+{
+	PSStaticView *sendingView = [sender draggingSource];
+	PSComponentType *componentType = [sendingView componentType];
+	
+	// Drop point
+	NSPoint dropPoint = [self convertPoint:[sender draggingLocation] fromView:nil];
+	dropPoint.x -= ([componentType calculateWidth] / 2);
+	dropPoint.y -= ([componentType calculateHeight] / 2);
+	
+	// Make component
+	[[delegate layout] addComponent:componentType
+								  x:dropPoint.x 
+								  y:dropPoint.y 
+							  width:[componentType calculateWidth]];
+
+	return YES;
+}
+
+- (void) drawRect:(NSRect)rect 
+{
+//	if ([[delegate layout] isReady] == NO)
+//		return;
+	
+	// Start time, for redraw time
+//	NSDate *startDate = [NSDate date];
+		
+	// Background Colour
+	[[NSColor colorWithDeviceRed:0.75 green:0.75 blue:0.75 alpha:1.0] set];
+	NSRectFill(rect);
+	
+	// Grid Colour
+	[[NSColor colorWithDeviceRed:0.85 green:0.85 blue:0.85 alpha:0.75] set];
+	
+	// Horizontal+Vertical Grids
+	float gridSpacing = [[NSApp delegate] userdefault_GridSize];
+	float x = roundf(rect.origin.x);
+	while (fmodf(x, gridSpacing) > 0)
+		x++;
+	NSBezierPath *vertPath = [NSBezierPath bezierPath];	
+	for (; x < rect.origin.x + rect.size.width; x += gridSpacing)
+	{
+		[vertPath moveToPoint:NSMakePoint(x, rect.origin.y)];
+		[vertPath lineToPoint:NSMakePoint(x, rect.origin.y + rect.size.height)];
+	}
+	[vertPath stroke];
+	float y = roundf(rect.origin.y);
+	while (fmodf(y, gridSpacing) > 0)
+		y++;
+	NSBezierPath *horzPath = [NSBezierPath bezierPath];	
+	for (; y < rect.origin.y + rect.size.height; y += gridSpacing)
+	{
+		[horzPath moveToPoint:NSMakePoint(rect.origin.x, y)];
+		[horzPath lineToPoint:NSMakePoint(rect.origin.x + rect.size.width, y)];
+	}
+	[horzPath stroke];
+	
+	// Components and connections
+	[delegate drawConnections:self andPositionAndSize:rect];
+	[delegate drawComponents:self andPositionAndSize:rect];
+	
+	// Selection box?
+	if (m_State == stateBoxSelect)
+	{
+		NSBezierPath *selBox = [NSBezierPath bezierPath];
+		[selBox setLineWidth:cSelectionBoxBorder];
+		[[NSColor blackColor] set];
+		[[[NSApp delegate] colourSelectionBox] setFill];
+		[selBox moveToPoint:NSMakePoint(m_DownPoint.x, m_DownPoint.y)];
+		[selBox lineToPoint:NSMakePoint(m_CurrentPoint.x, m_DownPoint.y)];
+		[selBox lineToPoint:NSMakePoint(m_CurrentPoint.x, m_CurrentPoint.y)];
+		[selBox lineToPoint:NSMakePoint(m_DownPoint.x, m_CurrentPoint.y)];
+		[selBox closePath];
+		[selBox fill];
+		[selBox stroke];
+	}
+	else if (m_State == stateConnection) // Or connection
+	{
+		NSBezierPath *connectionLine = [NSBezierPath bezierPath];
+		[connectionLine setLineCapStyle:NSRoundLineCapStyle];
+
+		// Input?
+		BOOL isInput = [m_Connection isInput];
+		int dataType;
+		if (isInput)
+			dataType = [m_Connection intAllowedTypes];
+		else
+			dataType = [m_Connection intOutputType];
+
+		// See if we have a connection
+		PSComponentConnection *connection = [delegate matchConnection:m_CurrentPoint matchType:dataType 
+														   matchInput:!isInput matchOutput:isInput];
+		BOOL isValid = NO;
+		if (connection != nil && [connection componentOwner] != [m_Connection componentOwner])
+		{
+			if (isInput && ![connection isInput])
+			{
+				isValid = YES;
+				if ( ([m_Connection intConnectionType] == cComponentConnection_AutoType) && ([m_Connection intEffectiveType] == nil) ) 
+					dataType = [connection intOutputType]; 
+			}
+			else if (!isInput && [connection isInput])
+			{
+				isValid = YES;
+			}
+		}
+			
+		// Set colour
+		NSColor *connector, *connectorSelected;
+		switch (dataType)
+		{
+			case cAllowedFlow:
+				connectorSelected = [[NSApp delegate] colourConnectionFlow];
+				break;
+			case cAllowedBoolean:
+				connectorSelected = [[NSApp delegate] colourConnectionBoolean];
+				break;
+			case cAllowedByte:
+				connectorSelected = [[NSApp delegate] colourConnectionByte];
+				break;
+			case cAllowedDateTime:
+				connectorSelected = [[NSApp delegate] colourConnectionDateTime];
+				break;
+			case cAllowedInteger:
+				connectorSelected = [[NSApp delegate] colourConnectionInteger];
+				break;
+			case cAllowedReal:
+				connectorSelected = [[NSApp delegate] colourConnectionReal];
+				break;
+			case cAllowedString:
+				connectorSelected = [[NSApp delegate] colourConnectionString];
+				break;
+			default:
+				connectorSelected = [[NSApp delegate] colourComponentBorder];
+				break;
+		}
+		connector = [[NSApp delegate] getNonSelectedColour:connectorSelected];
+		
+		if (isValid)
+		{
+			[connectionLine setLineWidth:cConnectionThickess * 1.5];
+			[connector set];
+			[connectionLine moveToPoint:NSMakePoint(m_DownPoint.x, m_DownPoint.y)];
+			if ([m_Connection isInput])
+			{
+				[connectionLine lineToPoint:NSMakePoint([connection floatAbsConnectionX] + cConnectionSize/2, 
+														[connection floatAbsConnectionY] + cConnectionSize/2)];
+			}
+			else
+			{
+				[connectionLine lineToPoint:NSMakePoint([connection floatAbsConnectionX] - cConnectionSize/2, 
+														[connection floatAbsConnectionY] + cConnectionSize/2)];
+			}
+		}
+		else
+		{
+			[connectionLine setLineWidth:cConnectionThickess * 0.75];
+			[connectorSelected set];
+			[connectionLine moveToPoint:NSMakePoint(m_DownPoint.x, m_DownPoint.y)];
+			[connectionLine lineToPoint:NSMakePoint(m_CurrentPoint.x, m_CurrentPoint.y)];
+		}
+		[connectionLine stroke];
+	}
+	
+//	NSLog(@"View drawRect time taken:%f seconds", -[startDate timeIntervalSinceNow]);
+}
+
+- (void) mouseDown:(NSEvent *)event
+{
+	// If creating connection, either complete or cancel
+	if (m_State == stateConnection)
+	{
+		// Set cursor back etc.
+		[[self window] setAcceptsMouseMovedEvents:NO];
+		[[self window] enableCursorRects];
+		[NSCursor pop];
+		m_State = stateNone;
+		
+		// Input?
+		BOOL isInput = [m_Connection isInput];
+		int dataType;
+		if (isInput)
+			dataType = [m_Connection intAllowedTypes];
+		else
+			dataType = [m_Connection intOutputType];
+		
+		// See if we have a connection
+		PSComponentConnection *connection = [delegate matchConnection:m_CurrentPoint matchType:dataType 
+														   matchInput:!isInput matchOutput:isInput];
+		BOOL isValid = NO;
+		if (connection != nil && [connection componentOwner] != [m_Connection componentOwner])
+		{
+			if (isInput && ![connection isInput])
+			{
+				isValid = YES;
+				if ( ([m_Connection intConnectionType] == cComponentConnection_AutoType) && ([m_Connection intEffectiveType] == nil) ) 
+					dataType = [connection intOutputType]; 
+
+				// Make connection
+				[[delegate layout] makeConnection:connection destination:m_Connection];
+			}
+			else if (!isInput && [connection isInput])
+			{
+				isValid = YES;
+
+				// Make connection
+				[[delegate layout] makeConnection:m_Connection destination:connection];
+			}
+		}
+
+		// Clear selected
+		[[delegate layout] clearSelectedComponents];
+
+		[self setNeedsDisplay:YES];
+		return;
+	}
+
+	m_State = stateNone;
+	
+	// Double click?
+	if ([event clickCount] == 2)
+	{
+		// No components, quit
+		if ([[[delegate layout] arrayComponentsSelected] count] == 0)
+			return;
+
+		// More than one selected component, do nothing (at the moment)
+		if ([[[delegate layout] arrayComponentsSelected] count] > 1)
+			return;
+
+		// If we have selected a component, then what we do depends on what type of component it is
+		NSEnumerator *enumerator = [[[delegate layout] arrayComponentsSelected] objectEnumerator];
+		PSComponent *component = [enumerator nextObject];
+		int group = [[component componentType] intGroup];
+//		int index = [[component componentType] intIndex];
+		switch (group)
+		{
+			case cComponentGroup_Literal:
+				[[[delegate layout] controllerLayout] setLiteralValue:component];
+				break;
+		}
+		return;
+	}
+	
+	// Grab hand combination held?
+	if ( ([event modifierFlags] & NSDeviceIndependentModifierFlagsMask) == (NSCommandKeyMask|NSAlternateKeyMask))
+	{
+		m_GrabOrigin = [event locationInWindow];
+		m_GrabOrigin.x -= [m_ViewMainScroll frame].origin.x;
+		m_GrabOrigin.y -= [m_ViewMainScroll frame].origin.y;
+		m_ScrollOrigin = [[m_ViewMainScroll contentView] bounds].origin;
+
+		// Start autoscroll timer
+		m_ScrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+														 target:self
+													   selector:@selector(scrollTimerEvent:)
+													   userInfo:nil
+														repeats:YES];
+		[[self window] disableCursorRects];
+		[[NSCursor closedHandCursor] push];
+		m_State = stateGrabHand;
+		return;
+	}
+	
+	// Down point
+	m_DownPoint = [self convertPoint:[event locationInWindow] fromView:nil];
+	m_CurrentPoint = m_DownPoint;
+	m_MoveXLeft = 0;
+	m_MoveYLeft = 0;
+	
+	// Shift held? (multi-select)
+	BOOL shiftHeld = ([event modifierFlags] & NSDeviceIndependentModifierFlagsMask) == NSShiftKeyMask;
+	
+	// How about components?
+	if ([delegate matchComponent:m_DownPoint shiftHeld:shiftHeld])
+	{
+		m_State = stateComponentSelected;
+		
+		// Save current position of all components
+		NSEnumerator *enumerator = [[[delegate layout] arrayComponentsSelected] objectEnumerator];
+		PSComponent *component = nil;
+		while (component = [enumerator nextObject])
+			[component savePosition];
+		
+		// Start autoscroll timer
+		m_ScrollTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+														 target:self
+													   selector:@selector(scrollTimerEvent:)
+													   userInfo:nil
+														repeats:YES];
+		[[self window] disableCursorRects];
+		[[NSCursor closedHandCursor] push];
+		[self setNeedsDisplay:YES];
+		return;
+	}
+
+	// Any connections?
+	m_Connection = [delegate matchConnection:m_DownPoint matchType:0 matchInput:YES matchOutput:YES];
+	if (m_Connection != nil)
+	{
+		// Do we have a connection selected?
+		if ([[[delegate layout] arrayConnectionsSelected] count] == 1)
+		{
+			PSConnection *connection = [[[[delegate layout] arrayConnectionsSelected] objectEnumerator] nextObject];
+			if ([connection connectionSource] == m_Connection)
+			{
+				[[delegate layout] removeConnection:[connection connectionSource] destination:[connection connectionDestination]];
+				[[delegate layout] clearSelectedConnections];
+				m_Connection = [connection connectionDestination];
+			}
+			else if ([connection connectionDestination] == m_Connection)
+			{
+				[[delegate layout] removeConnection:[connection connectionSource] destination:[connection connectionDestination]];
+				[[delegate layout] clearSelectedConnections];
+				m_Connection = [connection connectionSource];
+			}
+		}
+		else
+		{
+			[[delegate layout] clearSelectedConnections];
+		}
+
+		if ([m_Connection isInput])
+		{
+			m_DownPoint.x = [m_Connection floatAbsConnectionX] - cConnectionSize/2;
+		}
+		else
+		{
+			m_DownPoint.x = [m_Connection floatAbsConnectionX] + cConnectionSize/2;
+		}
+		m_DownPoint.y = [m_Connection floatAbsConnectionY] + cConnectionSize/2;
+		m_State = stateConnection;
+		[[delegate layout] setSelectedComponent:[m_Connection componentOwner]];
+		[[self window] disableCursorRects];
+		[[NSCursor crosshairCursor] push];
+		[self setNeedsDisplay:YES];
+		return;
+	}
+
+	// Maybe match a connection line?
+	m_ConnectionLine = [delegate matchConnectionLine:m_DownPoint];
+	if (m_ConnectionLine != nil)
+	{
+		m_State = stateConnectionLine;
+		[self setNeedsDisplay:YES];
+		return;
+	}
+	
+	// Must be doing box select
+	m_State = stateBoxSelect;
+}
+
+- (void) mouseDragged:(NSEvent *)event
+{
+	NSPoint mousePoint = [event locationInWindow];
+	mousePoint.x -= [m_ViewMainScroll frame].origin.x;
+	mousePoint.y -= [m_ViewMainScroll frame].origin.y;
+	
+	// If not inside window ignore
+	BOOL inWindow = YES;
+	if (mousePoint.x < 0)
+		inWindow = NO;
+	else if (mousePoint.x > [m_ViewMainScroll frame].size.width) 
+		inWindow = NO;
+	if (mousePoint.y < 0)
+		inWindow = NO;
+	else if (mousePoint.y > [m_ViewMainScroll frame].size.height) 
+		inWindow = NO;
+	if (!inWindow)
+		return;
+	
+	NSPoint newPoint = [self convertPoint:[event locationInWindow] fromView:nil];
+	if (m_State == stateComponentSelected)
+	{
+		int deltaX = 0;
+		int deltaY = 0;
+		m_MoveXLeft += (newPoint.x - m_CurrentPoint.x);
+		m_MoveYLeft += (newPoint.y - m_CurrentPoint.y);
+		
+		// Snap movement to grid
+		if ([[NSApp delegate] userdefault_GridSnap])
+		{	
+			int gridSpacing = [[NSApp delegate] userdefault_GridSize];
+			
+			// Move left
+			while (m_MoveXLeft <= -gridSpacing)
+			{
+				m_MoveXLeft += gridSpacing;
+				deltaX -= gridSpacing;
+			}
+			
+			// Move right
+			while (m_MoveXLeft >= gridSpacing)
+			{
+				m_MoveXLeft -= gridSpacing;
+				deltaX += gridSpacing;
+			}
+			
+			// Move up
+			while (m_MoveYLeft <= -gridSpacing)
+			{
+				m_MoveYLeft += gridSpacing;
+				deltaY -= gridSpacing;
+			}
+			
+			// Move down
+			while (m_MoveYLeft >= gridSpacing)
+			{
+				m_MoveYLeft -= gridSpacing;
+				deltaY += gridSpacing;
+			}
+		} 
+		else
+		{
+			deltaX = m_MoveXLeft;
+			deltaY = m_MoveYLeft;
+			m_MoveXLeft = 0;
+			m_MoveYLeft = 0;
+		}
+			
+		[delegate dragLeftWithX:deltaX 
+						   andY:deltaY];
+		m_CurrentPoint = newPoint;
+		[self setNeedsDisplay:YES];
+	} 
+	else if (m_State == stateGrabHand)
+	{
+		float deltaX = m_GrabOrigin.x - mousePoint.x;
+		float deltaY = mousePoint.y - m_GrabOrigin.y;
+		NSPoint newOrigin = NSMakePoint (m_ScrollOrigin.x + deltaX, m_ScrollOrigin.y + deltaY);
+		[[m_ViewMainScroll contentView] scrollPoint: newOrigin];
+	}
+	else if (m_State == stateConnection)
+	{
+	}
+	else if (m_State == stateBoxSelect)
+	{
+		// Check which components to select
+		m_CurrentPoint = newPoint;
+		float x1 = MIN(m_DownPoint.x, m_CurrentPoint.x);
+		float x2 = MAX(m_DownPoint.x, m_CurrentPoint.x);
+		float y1 = MIN(m_DownPoint.y, m_CurrentPoint.y);
+		float y2 = MAX(m_DownPoint.y, m_CurrentPoint.y);
+		[delegate selectionBox:NSMakeRect(x1, y1, x2-x1, y2-y1)];
+	} 
+}
+
+- (void) mouseUp:(NSEvent *)event
+{
+	// Create undo for movement 
+	if (m_State == stateComponentSelected)
+	{
+		// Have any moved?
+		NSUndoManager *undo = [delegate undoManager];
+		NSEnumerator *enumerator = [[[delegate layout] arrayComponentsSelected] objectEnumerator];
+		PSComponent *component = nil;
+		while (component = [enumerator nextObject])
+		{
+			if ( ([component intX] != [component intOrigX]) || ([component intY] != [component intOrigY]))
+			{
+				[[undo prepareWithInvocationTarget:[delegate layout]]
+						moveComponent:component
+									x:[component intOrigX] 
+									y:[component intOrigY]];
+
+				// Set undo action name
+				[undo setActionName:@"Move Component(s)"];
+				[[delegate layout] makingUndo];
+			}
+		}
+	}
+	
+	// Restore cursor and kill autoscroll timer, then redraw
+	if (m_State == stateGrabHand || m_State == stateComponentSelected)
+	{
+		[[self window] enableCursorRects];
+		[NSCursor pop];
+		[m_ScrollTimer invalidate];
+		m_State = stateNone;
+		[self setNeedsDisplay:YES];
+	}
+	else if (m_State == stateBoxSelect)
+	{
+		m_State = stateNone;
+		[self setNeedsDisplay:YES];
+	}
+	else if (m_State == stateComponentSelected)
+	{
+		m_State = stateNone;
+	}
+	else if (m_State == stateConnection)
+	{
+		[[self window] makeFirstResponder:self];
+		[[self window] setAcceptsMouseMovedEvents:YES];
+	}
+}
+
+- (void) mouseMoved:(NSEvent *)event
+{
+	NSPoint mousePoint = [event locationInWindow];
+	mousePoint.x -= [m_ViewMainScroll frame].origin.x;
+	mousePoint.y -= [m_ViewMainScroll frame].origin.y;
+	
+	// If not inside window ignore
+	BOOL inWindow = YES;
+	if (mousePoint.x < 0)
+		inWindow = NO;
+	else if (mousePoint.x > [m_ViewMainScroll frame].size.width) 
+		inWindow = NO;
+	if (mousePoint.y < 0)
+		inWindow = NO;
+	else if (mousePoint.y > [m_ViewMainScroll frame].size.height) 
+		inWindow = NO;
+	if (!inWindow)
+		return;
+	m_CurrentPoint = [self convertPoint:[event locationInWindow] fromView:nil];
+	[self setNeedsDisplay:YES];
+}
+
+#pragma mark SmoothScrolling
+- (void) scrollTimerEvent: (NSTimer*) aTimer
+{
+	NSEvent* event = [NSApp currentEvent];
+    if ([event type] == NSLeftMouseDragged)
+	{
+		[self autoscroll:[NSApp currentEvent]];
+	}
+}
+
+#pragma mark Methods
+- (void) centreView
+{
+	// Calculate start position
+	NSRect frame = [(NSClipView*)[self superview] documentVisibleRect];
+	float left = m_CentrePoint.x - (frame.size.width / 2);
+	if (left < 0)
+		left = 0;
+	float top = m_CentrePoint.y - (frame.size.height / 2);
+	if (top < 0)
+		top = 0;
+	[self scrollPoint:NSMakePoint(left , top)];
+}
+
+- (void) verticallyCentreView
+{
+	NSRect bounds = [self bounds];
+	m_CentrePoint.x = 0;
+	m_CentrePoint.y = bounds.size.height/2;
+	[self centreView];
+}
+
+- (void) scrollTo:(NSPoint)topLeft
+{
+	[self scrollPoint:topLeft];
+}
+
+@end

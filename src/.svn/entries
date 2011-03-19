@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="1"
+   name=""
+   committed-date="2007-08-30T17:53:03.581583Z"
+   url="file:///Users/daryl/Programming/Repositories/Spider/Trunk/src"
+   last-author="daryl"
+   kind="dir"
+   uuid="d51f2355-ee38-0410-bcfb-f4002f2e1925"
+   repos="file:///Users/daryl/Programming/Repositories/Spider"
+   revision="1"/>
+<entry
+   committed-rev="1"
+   name="main.m"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="ef3a322bd4f8117b0f3c4bceccfdbf6e"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="1"
+   name="LayoutTableController.h"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="51edeb7b3c69882c5965b8d04fa533c7"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="1"
+   name="LayoutTableController.m"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="9c2ee9d906606bcab4eec3b87be3703b"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="1"
+   name="Connection.h"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="a2efb6e28820c934f7a9bfb100969f02"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="23"
+   name="ComponentType.h"
+   text-time="2007-09-11T20:00:58.000000Z"
+   committed-date="2007-09-11T21:20:01.714704Z"
+   checksum="1cac048bdf11220681b321c49f739e3f"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="23"/>
+<entry
+   committed-rev="1"
+   name="Connection.m"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="ab75403802c8cde8b1452a7434f971e9"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="8"
+   name="Project.h"
+   text-time="2007-09-02T14:41:24.000000Z"
+   committed-date="2007-09-02T16:25:09.695390Z"
+   checksum="f21058dffbbec56b6d983a100b0ae6d1"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="8"/>
+<entry
+   committed-rev="23"
+   name="ComponentType.m"
+   text-time="2007-09-11T19:08:57.000000Z"
+   committed-date="2007-09-11T21:20:01.714704Z"
+   checksum="002db3126a0be9591d4cc2f7db49093c"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="23"/>
+<entry
+   committed-rev="24"
+   name="View.h"
+   text-time="2007-09-11T21:29:12.000000Z"
+   committed-date="2007-09-11T21:32:25.908586Z"
+   checksum="d7393ba7e4dedd0e40d8bd68dd2f7df2"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="24"/>
+<entry
+   committed-rev="1"
+   name="Project.m"
+   text-time="2007-09-02T14:41:38.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="830b4a980bae71d86adc8e17d117059f"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="13"
+   name="Layout.h"
+   text-time="2007-09-12T08:13:16.000000Z"
+   committed-date="2007-09-08T12:02:19.700180Z"
+   checksum="1b67197dbf0c01085cc01bf8a5a74749"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-09-12T08:13:16.000000Z"
+   revision="13"/>
+<entry
+   committed-rev="1"
+   name="Document.h"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="6581e0711c0983115a51545a03559e2a"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="22"
+   name="View.m"
+   text-time="2007-09-11T21:29:20.000000Z"
+   committed-date="2007-09-10T21:07:17.498006Z"
+   checksum="50c87c7023dd64bb61fe919ed6e01548"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-09-12T08:20:47.000000Z"
+   revision="22"/>
+<entry
+   committed-rev="23"
+   name="Layout.m"
+   text-time="2007-09-11T21:28:32.000000Z"
+   committed-date="2007-09-11T21:20:01.714704Z"
+   checksum="ea19c0751a5808dd89dc0202a64ca612"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-09-12T08:12:59.000000Z"
+   revision="23"/>
+<entry
+   committed-rev="23"
+   name="StaticView.h"
+   text-time="2007-09-11T20:20:15.000000Z"
+   committed-date="2007-09-11T21:20:01.714704Z"
+   checksum="70a65edbe22a840ce5f60e32563e09a8"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="23"/>
+<entry
+   committed-rev="23"
+   name="ComponentConnection.h"
+   text-time="2007-09-11T19:07:04.000000Z"
+   committed-date="2007-09-11T21:20:01.714704Z"
+   checksum="28ff6c5c5b4131507bac979790f31e36"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="23"/>
+<entry
+   committed-rev="1"
+   name="Document.m"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="638ec76f6bd206493b1e2118cf6ac6de"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="16"
+   name="AppController.h"
+   text-time="2007-09-09T19:18:41.000000Z"
+   committed-date="2007-09-09T19:46:01.156467Z"
+   checksum="4effbc46a8f895c09a67a9114bcace43"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="16"/>
+<entry
+   committed-rev="23"
+   name="ComponentConnection.m"
+   text-time="2007-09-11T19:07:26.000000Z"
+   committed-date="2007-09-11T21:20:01.714704Z"
+   checksum="e05a57226741d644753247a5626d1cf4"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="23"/>
+<entry
+   committed-rev="23"
+   name="StaticView.m"
+   text-time="2007-09-11T20:47:30.000000Z"
+   committed-date="2007-09-11T21:20:01.714704Z"
+   checksum="e2c3130dfe614bd1c6fe6fa5f00f9fe9"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="23"/>
+<entry
+   committed-rev="23"
+   name="AppController.m"
+   text-time="2007-09-11T20:02:05.000000Z"
+   committed-date="2007-09-11T21:20:01.714704Z"
+   checksum="8496f4bec406361673200e796398d391"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="23"/>
+<entry
+   committed-rev="1"
+   name="Classes.h"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="8485009240de5b03c5348e24a2259774"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="23"
+   name="Component.h"
+   text-time="2007-09-11T16:04:55.000000Z"
+   committed-date="2007-09-11T21:20:01.714704Z"
+   checksum="5692205b194157237288f98236729d4b"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="23"/>
+<entry
+   committed-rev="1"
+   name="ProjectWindowController.h"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="001e28e6b0494d46c67095016a4defeb"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="23"
+   name="Component.m"
+   text-time="2007-09-11T16:06:10.000000Z"
+   committed-date="2007-09-11T21:20:01.714704Z"
+   checksum="24a9907085f35762e88b1e065bb5c745"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="23"/>
+<entry
+   committed-rev="1"
+   name="ProjectWindowController.m"
+   text-time="2007-08-30T18:46:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="3b6ac3d717ee7fd2dccecf43a696b386"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="13"
+   name="LayoutWindowController.h"
+   text-time="2007-09-12T08:12:28.000000Z"
+   committed-date="2007-09-08T12:02:19.700180Z"
+   checksum="4cb0f3bc093540b22081a4cd22d6e2c2"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-09-12T08:12:28.000000Z"
+   revision="13"/>
+<entry
+   committed-rev="1"
+   name="Headers.h"
+   text-time="2007-09-11T20:24:12.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="800474525cc2c82e076be8eb6674a964"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"/>
+<entry
+   committed-rev="16"
+   name="Constants.h"
+   text-time="2007-09-11T20:28:12.000000Z"
+   committed-date="2007-09-09T19:46:01.156467Z"
+   conflict-wrk="Constants.h.mine"
+   checksum="4b0c0125d9fbdf1388867d4d75b4d049"
+   last-author="daryl"
+   kind="file"
+   conflict-new="Constants.h.r16"
+   prop-time="2007-09-12T08:13:38.000000Z"
+   conflict-old="Constants.h.r23"
+   revision="16"/>
+<entry
+   committed-rev="22"
+   name="LayoutWindowController.m"
+   text-time="2007-09-11T21:31:32.000000Z"
+   committed-date="2007-09-10T21:07:17.498006Z"
+   checksum="0634b043eea3f0e0f7135262cb1a6695"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-09-12T08:15:57.000000Z"
+   revision="22"/>
+<entry
+   committed-rev="7"
+   name="PreferenceController.h"
+   text-time="2007-09-02T13:46:37.000000Z"
+   committed-date="2007-09-02T14:23:55.962540Z"
+   checksum="327e4199f9711be9e4ab09d466fdfec0"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="7"/>
+<entry
+   committed-rev="7"
+   name="PreferenceController.m"
+   text-time="2007-09-02T14:22:41.000000Z"
+   committed-date="2007-09-02T14:23:55.962540Z"
+   checksum="53ecb1863cd3c8da92adbc25fb3a24fe"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:12.000000Z"
+   revision="7"/>
+</wc-entries>

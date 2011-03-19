@@ -1,0 +1,76 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {"" = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = NSDatePicker; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = NSFlippedView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {CLASS = PSDocument; LANGUAGE = ObjC; SUPERCLASS = NSDocument; }, 
+        {
+            ACTIONS = {buttonPressed = id; titleChanged = id; widthChanged = id; }; 
+            CLASS = PSInspectorPanel; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                tabviewInspector = NSTabView; 
+                textfieldPositionHeight = NSTextField; 
+                textfieldPositionWidth = NSTextField; 
+                textfieldPositionX = NSTextField; 
+                textfieldPositionY = NSTextField; 
+                textfieldTitle = NSTextField; 
+                textfieldTypeGroup = NSTextField; 
+                textfieldTypeName = NSTextField; 
+            }; 
+            SUPERCLASS = NSPanel; 
+        }, 
+        {
+            ACTIONS = {
+                actionValueDone = id; 
+                showPalette = id; 
+                togglePalette = id; 
+                toggleRulers = id; 
+                zoomIn = id; 
+                zoomOut = id; 
+            }; 
+            CLASS = PSLayoutWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                buttoncellValueBooleanFalse = NSButtonCell; 
+                buttoncellValueBooleanTrue = NSButtonCell; 
+                datepickerDateTime = NSDatePicker; 
+                textfieldID = NSTextField; 
+                textfieldPosition = NSTextField; 
+                textfieldSize = NSTextField; 
+                textfieldTitleValue = NSTextField; 
+                textfieldTitleValueLabel = NSTextField; 
+                textfieldType = NSTextField; 
+                textfieldValueByte = NSTextField; 
+                textfieldValueInteger = NSTextField; 
+                textfieldValueReal = NSTextField; 
+                textfieldValueString = NSTextField; 
+                viewMain = PSView; 
+                viewMainScroll = NSScrollView; 
+                windowDocument = NSWindow; 
+                windowValueBoolean = NSWindow; 
+                windowValueByte = NSWindow; 
+                windowValueDateTime = NSWindow; 
+                windowValueInteger = NSWindow; 
+                windowValueReal = NSWindow; 
+                windowValueString = NSWindow; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = PSProjectDataController; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = PSStaticView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            CLASS = PSView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {delegate = id; }; 
+            SUPERCLASS = NSView; 
+        }
+    ); 
+    IBVersion = 1; 
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="1"
+   name=""
+   committed-date="2007-08-30T17:53:03.581583Z"
+   url="file:///Users/daryl/Programming/Repositories/Spider/Trunk/res"
+   last-author="daryl"
+   kind="dir"
+   uuid="d51f2355-ee38-0410-bcfb-f4002f2e1925"
+   repos="file:///Users/daryl/Programming/Repositories/Spider"
+   revision="1"/>
+<entry
+   name="img"
+   kind="dir"/>
+</wc-entries>

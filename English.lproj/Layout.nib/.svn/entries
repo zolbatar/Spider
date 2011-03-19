@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="1"
+   name=""
+   committed-date="2007-08-30T17:53:03.581583Z"
+   url="file:///Users/daryl/Programming/Repositories/Spider/Trunk/English.lproj/Layout.nib"
+   last-author="daryl"
+   kind="dir"
+   uuid="d51f2355-ee38-0410-bcfb-f4002f2e1925"
+   repos="file:///Users/daryl/Programming/Repositories/Spider"
+   revision="1"/>
+<entry
+   committed-rev="17"
+   name="info.nib"
+   text-time="2007-09-09T21:44:32.000000Z"
+   committed-date="2007-09-10T18:49:32.262328Z"
+   checksum="ec7b714e702160adbd94a726bf921e4c"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:13.000000Z"
+   revision="17"/>
+<entry
+   committed-rev="17"
+   name="keyedobjects.nib"
+   text-time="2007-09-09T21:44:32.000000Z"
+   committed-date="2007-09-10T18:49:32.262328Z"
+   checksum="bd744586c23023eb2d87ec1119448489"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:13.000000Z"
+   revision="17"/>
+<entry
+   committed-rev="1"
+   name="classes.nib"
+   text-time="2007-09-09T21:44:32.000000Z"
+   committed-date="2007-08-30T17:53:03.581583Z"
+   checksum="4bae859746b2865f6af0d39eb8caf373"
+   last-author="daryl"
+   kind="file"
+   prop-time="2007-08-30T18:46:13.000000Z"/>
+</wc-entries>

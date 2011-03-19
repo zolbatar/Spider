@@ -1,0 +1,37 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {
+            CLASS = PSLayoutTableController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {controllerProject = PSProjectWindowController; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                buttonAddLayout = id; 
+                buttonDeleteLayout = id; 
+                buttonGetLayoutNameCancel = id; 
+                buttonGetLayoutNameOK = id; 
+                buttonRenameLayout = id; 
+                layoutTableViewAction = id; 
+                layoutTableViewDoubleAction = id; 
+                textfieldProjectName = id; 
+            }; 
+            CLASS = PSProjectWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                buttonAddLayout = NSButton; 
+                buttonDeleteLayout = NSButton; 
+                buttonRenameLayout = NSButton; 
+                tableviewLayouts = NSTableView; 
+                textfieldProjectName = NSTextField; 
+                textfieldSetLayoutName = NSTextField; 
+                windowSetLayoutName = NSWindow; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

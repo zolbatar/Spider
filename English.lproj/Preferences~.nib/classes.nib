@@ -1,0 +1,29 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                actionComponentDropAlign = id; 
+                actionComponentScrollOnSelect = id; 
+                actionCopyConnections = id; 
+                actionGridSize = id; 
+                actionGridSnap = id; 
+                actionShowAnimations = id; 
+                actionShowAnimationsFlow = id; 
+            }; 
+            CLASS = PSPreferenceController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                buttonComponentScrollOnSelect = NSButton; 
+                buttonGridSnap = NSButton; 
+                buttonShowAnimations = NSButton; 
+                buttonShowAnimationsFlow = NSButton; 
+                matrixComponentDropAlign = NSMatrix; 
+                matrixCopyConnections = NSMatrix; 
+                textfieldGridSize = NSTextField; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

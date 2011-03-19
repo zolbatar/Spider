@@ -1,0 +1,88 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {actionMenuPreferences = id; }; 
+            CLASS = PSAppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                panelPalette = NSPanel; 
+                staticviewConditionalCompare = PSStaticView; 
+                staticviewLiteralBoolean = PSStaticView; 
+                staticviewLiteralByte = PSStaticView; 
+                staticviewLiteralDateTime = PSStaticView; 
+                staticviewLiteralInteger = PSStaticView; 
+                staticviewLiteralReal = PSStaticView; 
+                staticviewLiteralString = PSStaticView; 
+                staticviewProgramFlowPause = PSStaticView; 
+                staticviewProgramFlowStart = PSStaticView; 
+                staticviewProgramFlowStop = PSStaticView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = PSDataController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {staticviewLiteralInteger = PSStaticView; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            ACTIONS = {actionTitleChanged = id; }; 
+            CLASS = PSInspectorController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                textfieldPositionHeight = NSTextField; 
+                textfieldPositionWidth = NSTextField; 
+                textfieldPositionX = NSTextField; 
+                textfieldPositionY = NSTextField; 
+                textfieldTitle = NSTextField; 
+                textfieldTypeGroup = NSTextField; 
+                textfieldTypeName = NSTextField; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            ACTIONS = {
+                actionButtonPressed = id; 
+                actionMenuBoolean = id; 
+                actionMenuConditional = id; 
+            }; 
+            CLASS = PSPaletteController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                menuBoolean = NSMenu; 
+                menuConditional = NSMenu; 
+                popupbuttonGroup = NSPopUpButton; 
+                popupbuttonType = NSPopUpButton; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            ACTIONS = {
+                actionComponentDropAlign = id; 
+                actionComponentScrollOnSelect = id; 
+                actionConnectionShowArrowhead = id; 
+                actionGridSize = id; 
+                actionGridSnap = id; 
+            }; 
+            CLASS = PSPreferenceController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                buttonComponentScrollOnSelect = NSButton; 
+                buttonConnectionShowArrowhead = NSButton; 
+                buttonGridSnap = NSButton; 
+                matrixComponentDropAlign = NSMatrix; 
+                textfieldGridSize = NSTextField; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = PSStaticView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            CLASS = PSView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {delegate = id; viewMainScroll = NSScrollView; }; 
+            SUPERCLASS = NSView; 
+        }
+    ); 
+    IBVersion = 1; 
+}

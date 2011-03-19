@@ -1,0 +1,31 @@
+Commands
+--------
+
+Shift - Multiple select
+Command + Option = Grab hand scrolling
+Delete - Delete component
+
+
+
+Comparator
+	->Less Than
+	->Equals
+	->Not Equals
+	->Greater Than
+	->Zero
+Conditional
+Boolean
+	And
+	Or
+	Not
+	Xor
+Arrays
+	Iterators
+	Insert
+	Delete
+	Update
+Debug
+Console
+Graphics
+Form - Form Builder
+Communication
