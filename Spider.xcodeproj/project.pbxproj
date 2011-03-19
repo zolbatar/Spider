@@ -468,14 +468,14 @@
 		C05733CC08A9546B00998B17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "";
-				CONFIGURATION_TEMP_DIR = "";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				OBJROOT = "";
+				OBJROOT = "$(PROJECT_DIR)/Build";
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
-				SYMROOT = "";
+				SYMROOT = "$(PROJECT_DIR)/Build";
 			};
 			name = Debug;
 		};

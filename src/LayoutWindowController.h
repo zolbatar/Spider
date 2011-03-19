@@ -65,6 +65,7 @@
 #pragma mark Accessors
 - (void) setProject:(PSProject *)project;
 - (void) setLayout:(PSLayout *)layout;
+- (PSLayout *) layout;
 - (PSLayout *) getLayout;
 - (PSView *) viewMain;
 - (NSUndoManager *) undoManager;

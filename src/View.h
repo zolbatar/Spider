@@ -9,7 +9,7 @@
 
 @interface PSView : NSView
 {
-	id delegate;
+	PSLayoutWindowController *delegate;
 	NSPoint m_CentrePoint;
 	
 	// Click events

@@ -319,6 +319,11 @@ static NSString *toolbarItemIdentifierShowPalette = @"Show/Hide Palette";
 //	[m_Layout setControllerLayout:self];
 }
 
+- (PSLayout *) layout
+{
+	return m_Layout;
+}
+
 - (PSLayout *) getLayout
 {
 	return m_Layout;
@@ -646,7 +651,7 @@ static NSString *toolbarItemIdentifierShowPalette = @"Show/Hide Palette";
 								return input;
 							break;
 						case cComponentConnection_TypeSet:
-							if (matchType == 0 && [input intEffectiveType] != nil)
+							if (matchType == 0 && ([input intEffectiveType] != nil))
 								return input;
 							if (([input intAllowedTypes] & matchType) > 0)
 								return input;
